@@ -9,26 +9,17 @@ function App() {
   const [ formState, setFormState ] = useState({
     title: "",
     description: "",
-    deadline: ""
+    deadline: "",
+    priority: 0,
   });
 
   const formChangeHandler = (event) => {
-    let form = {...formState};
+    const { name, value } = event.target
 
-    switch(event.target.name) {
-      case "title":
-          form.title = event.target.value;
-          break;
-      case "description":
-          form.description = event.target.value;
-          break;
-      case "deadline":
-          form.deadline = event.target.value;
-          break;
-      default:
-          form = formState;
-    }
-    setFormState(form);
+    setFormState((prev) => ({
+      ...prev,
+      [name]: name === "priority" ? Number(value) : value
+    }));
   }
 
   const formSubmitHandler = (event) => {
